@@ -24,6 +24,40 @@ public class Main {
         }
         System.out.println("Total weight: " + totalWeight);
 
+        Edge removed = mst.remove(0);
+        System.out.println("Removed edge: " + removed);
+
+        UnionFind uf = new UnionFind(V);
+        for (Edge edge : mst) {
+            uf.union(edge.src, edge.dest);
+
+        }
+        int rootOne = uf.find(removed.src);
+        int rootTwo = uf.find(removed.dest);
+        System.out.println("Root one: " + rootOne + ", Root two: " + rootTwo);
+
+        Edge replace = null;
+        for (Edge edge : edges) {
+            if (edge == removed) continue;
+            if (uf.find(edge.src) != uf.find(edge.dest) ) {
+                if (replace == null || edge.weight < replace.weight) {
+                    replace = edge;
+                }
+            }
+        }
+        System.out.println("Replace: " + replace);
+        mst.add(replace);
+
+        System.out.println(" New Mst: " + mst);
+        int newWeight = 0;
+        for (Edge edge : mst) {
+            newWeight += edge.weight;
+            System.out.println(edge);
+        }
+        System.out.println("New total weight: " + newWeight);
+
+
+
 
     }
 

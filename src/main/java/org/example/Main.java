@@ -1,17 +1,30 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        int V = 4;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        List<Edge> edges = new ArrayList<Edge>();
+        edges.add(new Edge(0, 1, 10));
+        edges.add(new Edge(1, 3, 15));
+        edges.add(new Edge(2, 3, 4));
+        edges.add(new Edge(2, 0, 6));
+        edges.add(new Edge(0, 3, 5));
+
+
+        List<Edge> mst = MstBuilder.buildMst(edges, V);
+        System.out.println("Minimal spanning tree:" + mst);
+        int totalWeight = 0;
+        for (Edge edge : mst) {
+            System.out.println(edge);
+            totalWeight += edge.weight;
         }
+        System.out.println("Total weight: " + totalWeight);
+
+
     }
+
 }
